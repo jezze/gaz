@@ -30,7 +30,7 @@ scc64-syn: $(OBJ) $(TARGETS_X86_64_SYN)
 	$(CC) -o $@ $^
 
 example/test.s: example/test.c
-	./scc64 < $^ > $@
+	./scc32-syn < $^ > $@
 
 example/test.o: example/test.s
 	$(AS) -o $@ $^
