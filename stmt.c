@@ -458,66 +458,68 @@ static void stmt(void)
 
     case BREAK:
         break_stmt();
-        
+
         break;
 
     case CONTINUE:
         continue_stmt();
-        
+
         break;
 
     case DO:
         do_stmt();
-        
+
         break;
 
     case FOR:
         for_stmt();
-        
+
         break;
 
     case IF:
         if_stmt();
-        
+
         break;
 
     case RETURN:
         return_stmt();
-        
+
         break;
 
     case SWITCH:
         switch_stmt();
-        
+
         break;
 
     case WHILE:
         while_stmt();
-        
+
         break;
 
     case LBRACE:
         compound(1);
-        
+
         break;
 
     case SEMI:
         Token = scan();
-        
+
         break;
 
     case DEFAULT:
         wrong_ctx(DEFAULT);
-        
+
         break;
 
     case CASE:
         wrong_ctx(CASE);
-        
+
         break;
+
     default:
-        rexpr(0); semi();
-        
+        rexpr(0);
+        semi();
+
         break;
 
     }

@@ -713,32 +713,32 @@ void genbranch(int dest, int inv)
 
         case equal:
             cgbrne(dest);
-            
+
             break;
 
         case not_equal:
             cgbreq(dest);
-            
+
             break;
 
         case less:
             cgbrge(dest);
-            
+
             break;
 
         case greater:
             cgbrle(dest);
-            
+
             break;
 
         case less_equal:
             cgbrgt(dest);
-            
+
             break;
 
         case greater_equal:
             cgbrlt(dest);
-            
+
             break;
 
         }
@@ -753,32 +753,32 @@ void genbranch(int dest, int inv)
 
         case equal:
             cgbreq(dest);
-            
+
             break;
 
         case not_equal:
             cgbrne(dest);
-            
+
             break;
 
         case less:
             cgbrlt(dest);
-            
+
             break;
 
         case greater:
             cgbrgt(dest);
-            
+
             break;
 
         case less_equal:
             cgbrle(dest);
-            
+
             break;
 
         case greater_equal:
             cgbrge(dest);
-            
+
             break;
 
         }
@@ -1179,52 +1179,52 @@ void genasop(int op, int p1, int p2, int swapped)
 
     case ASDIV:
         gendiv(swapped);
-        
+
         break;
 
     case ASMUL:
         genmul();
-        
+
         break;
 
     case ASMOD:
         genmod(swapped);
-        
+
         break;
 
     case ASPLUS:
         genadd(p1, p2, swapped);
-        
+
         break;
 
     case ASMINUS:
         gensub(p1, p2, swapped);
-        
+
         break;
 
     case ASLSHIFT:
         genshl(swapped);
-        
+
         break;
 
     case ASRSHIFT:
         genshr(swapped);
-        
+
         break;
 
     case ASAND:
         genand();
-        
+
         break;
 
     case ASXOR:
         genxor();
-        
+
         break;
 
     case ASOR:
         genior();
-        
+
         break;
 
     }

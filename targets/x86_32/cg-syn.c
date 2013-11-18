@@ -69,7 +69,7 @@ void cgsynth(char *op)
 
     case arg_count:
         ngen("%s\t%d(%%ebp),%%eax", op, 8);
-        
+
         break;
 
     case auto_word:
@@ -79,12 +79,12 @@ void cgsynth(char *op)
 
     case static_word:
         lgen("%s\t%c%d,%%eax", op, n);
-        
+
         break;
 
     case globl_word:
         sgen("%s\t%s,%%eax", op, s);
-        
+
         break;
 
     case auto_byte:
@@ -114,7 +114,7 @@ void cgsynand(void)
 {
 
     cgsynth("andl");
-    
+
 }
 
 void cgsynor(void)
@@ -128,7 +128,7 @@ void cgsynxor(void)
 {
 
     cgsynth("xorl");
-    
+
 }
 
 int cgload(void)
@@ -403,7 +403,7 @@ void cgsub(void)
 {
 
     gen("subl\t%ecx,%eax");
-    
+
 }
 
 void cgdiv(void)
@@ -426,7 +426,7 @@ void cgshl(void)
 {
 
     gen("shll\t%cl,%eax");
-    
+
 }
 
 void cgshr(void)
@@ -504,7 +504,7 @@ void cgge()
 {
 
     cgcmp("jl");
-    
+
 }
 
 void cgbrcond(char *i, int n)
@@ -644,7 +644,7 @@ void cgunscaleby(int v)
     ngen("%s\t$%d,%%ecx", "movl", v);
     gen("xorl\t%edx,%edx");
     gen("divl\t%ecx");
-    
+
 }
 
 void cgbool(void)
@@ -751,7 +751,7 @@ void cginc2iw(void)
 {
 
     ngen("%s\t(%%edx)", "incl", 0);
-    
+
 }
 
 void cgdec2iw(void)
@@ -821,14 +821,14 @@ void cginc2ib(void)
 {
 
     ngen("%s\t(%%edx)", "incb", 0);
-    
+
 }
 
 void cgdec2ib(void)
 {
 
     ngen("%s\t(%%edx)", "decb", 0);
-    
+
 }
 
 void cginclb(int a)
@@ -1045,7 +1045,7 @@ void cgdefw(int v)
 {
 
     ngen("%s\t%d", ".long", v);
-    
+
 }
 
 void cgdefp(int v)
@@ -1066,7 +1066,7 @@ void cgdefc(int c)
 {
 
     ngen("%s\t'%c'", ".byte", c);
-    
+
 }
 
 void cgbss(char *s, int z)

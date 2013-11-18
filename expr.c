@@ -781,7 +781,7 @@ static int postfix(int *lv)
             break;
 
         case INCR:
-        case DECR: 
+        case DECR:
             if (a)
             {
 

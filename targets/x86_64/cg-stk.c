@@ -387,28 +387,28 @@ void cginc1pi(int v)
 {
 
     ngen("%s\t$%d,(%%rax)", "addq", v);
-    
+
 }
 
 void cgdec1pi(int v)
 {
 
     ngen("%s\t$%d,(%%rax)", "subq", v);
-    
+
 }
 
 void cginc2pi(int v)
 {
 
     ngen("%s\t$%d,(%%rdx)", "addq", v);
-    
+
 }
 
 void cgdec2pi(int v)
 {
 
     ngen("%s\t$%d,(%%rdx)", "subq", v);
-    
+
 }
 
 void cgincpl(int a, int v)
@@ -443,21 +443,21 @@ void cgincpg(char *s, int v)
 {
 
     sgen2("%s\t$%d,%s", "addq", v, s);
-    
+
 }
 
 void cgdecpg(char *s, int v)
 {
 
     sgen2("%s\t$%d,%s", "subq", v, s);
-    
+
 }
 
 void cginc1iw(void)
 {
 
     ngen("%s\t(%%rax)", "incq", 0);
-    
+
 }
 
 void cgdec1iw(void)
@@ -527,7 +527,7 @@ void cginc1ib(void)
 {
 
     ngen("%s\t(%%rax)", "incb", 0);
-    
+
 }
 
 void cgdec1ib(void)
@@ -590,7 +590,7 @@ void cgdecgb(char *s)
 {
 
     sgen("%s\t%s", "decb", s);
-    
+
 }
 
 void cgbr(char *how, int n)

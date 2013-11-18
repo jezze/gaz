@@ -412,7 +412,7 @@ void cgdiv(void)
 
     gen("cqo");
     gen("idivq\t%rcx");
-    
+
 }
 
 void cgmod(void)
@@ -596,7 +596,7 @@ void cglognot(void)
     gen("negq\t%rax");
     gen("sbbq\t%rax,%rax");
     gen("incq\t%rax");
-    
+
 }
 
 void cgscale(void)
@@ -625,7 +625,7 @@ void cgscaleby(int v)
 
     ngen("%s\t$%d,%%rcx", "movq", v);
     gen("mulq\t%rcx,%rax");
-              
+
 }
 
 void cgscale2by(int v)
@@ -654,7 +654,7 @@ void cgbool(void)
     gen("negq\t%rax");
     gen("sbbq\t%rax,%rax");
     gen("negq\t%rax");
-    
+
 }
 
 void cgldinc(void)
