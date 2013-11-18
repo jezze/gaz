@@ -1,5 +1,15 @@
 # GAZ
 
-## ABOUT
+## THINGS TO DO
 
-TODO
+### Compiler
+
+* Fix BPW value, need to manually edit it right now
+
+### Assembler
+
+* Start porting s86
+
+### Linker
+
+* Port

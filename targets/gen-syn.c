@@ -1011,6 +1011,7 @@ static void genincptr(int *lv, int inc, int pre)
                 cgdec1pi(size);
 
         }
+
         else
         {
 
@@ -1102,6 +1103,7 @@ void geninc(int *lv, int inc, int pre)
             else
                 b ? cgdec1ib() : cgdec1iw();
         }
+
         else
         {
 

@@ -833,6 +833,7 @@ void geninc(int *lv, int inc, int pre)
 
         if (pre)
         {
+
             if (inc)
                 b ? cginc1ib() : cginc1iw();
             else
