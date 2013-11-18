@@ -1,5 +1,4 @@
 #include "defs.h"
-#include "cgen.h"
 
 static int findglob(char *s)
 {
