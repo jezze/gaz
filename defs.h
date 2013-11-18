@@ -3,13 +3,8 @@
 #include <string.h>
 #include <ctype.h>
 
-//CHANGE BPW FOR 32 and 16 BIT
-#define BPW                             8
-
 #define PREFIX                          'C'
 #define LPREFIX                         'L'
-#define INTSIZE                         BPW
-#define PTRSIZE                         BPW
 #define CHARSIZE                        1
 #define TEXTLEN                         512
 #define NAMELEN                         16

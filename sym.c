@@ -200,7 +200,7 @@ static void defglob(char *name, int prim, int type, int size, int val, int scls,
     {
 
         if (TARRAY == type)
-            genbss(gsym(name), size*INTSIZE);
+            genbss(gsym(name), size*arch_intsize());
         else
             gendefw(val);
 
@@ -210,7 +210,7 @@ static void defglob(char *name, int prim, int type, int size, int val, int scls,
     {
 
         if (TARRAY == type)
-            genbss(gsym(name), size*PTRSIZE);
+            genbss(gsym(name), size*arch_pointersize());
         else
             gendefp(val);
 
@@ -361,7 +361,7 @@ static void defloc(int prim, int type, int size, int val, int init)
     {
 
         if (TARRAY == type)
-            genbss(labname(val), size*INTSIZE);
+            genbss(labname(val), size*arch_intsize());
         else
             gendefw(init);
 
@@ -371,7 +371,7 @@ static void defloc(int prim, int type, int size, int val, int init)
     {
 
         if (TARRAY == type)
-            genbss(labname(val), size*PTRSIZE);
+            genbss(labname(val), size*arch_pointersize());
         else
             gendefp(init);
 
@@ -418,21 +418,21 @@ int objsize(int prim, int type, int size)
     int sp = prim & STCMASK;
 
     if (PINT == prim)
-        k = INTSIZE;
+        k = arch_intsize();
     else if (PCHAR == prim)
         k = CHARSIZE;
     else if (INTPTR == prim || CHARPTR == prim || VOIDPTR == prim)
-        k = PTRSIZE;
+        k = arch_pointersize();
     else if (INTPP == prim || CHARPP == prim || VOIDPP == prim)
-        k = PTRSIZE;
+        k = arch_pointersize();
     else if (STCPTR == sp || STCPP == sp)
-        k = PTRSIZE;
+        k = arch_pointersize();
     else if (UNIPTR == sp || UNIPP == sp)
-        k = PTRSIZE;
+        k = arch_pointersize();
     else if (PSTRUCT == sp || PUNION == sp)
         k = Sizes[prim & ~STCMASK];
     else if (FUNPTR == prim)
-        k = PTRSIZE;
+        k = arch_pointersize();
 
     if (TFUNCTION == type || TCONSTANT == type || TMACRO == type)
         return 0;

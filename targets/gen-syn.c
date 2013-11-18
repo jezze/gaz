@@ -911,7 +911,7 @@ void genbss(char *name, int len)
 {
 
     gendata();
-    cgbss(name, (len + INTSIZE - 1) / INTSIZE * INTSIZE);
+    cgbss(name, (len + arch_intsize() - 1) / arch_intsize() * arch_intsize());
 
 }
 
@@ -920,7 +920,7 @@ void genalign(int k)
 
     gendata();
 
-    while (k++ % INTSIZE)
+    while (k++ % arch_intsize())
         cgdefb(0);
 
 }

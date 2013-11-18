@@ -774,7 +774,7 @@ static int postfix(int *lv)
 
             }
 
-            genstack((na + 1) * INTSIZE);
+            genstack((na + 1) * arch_intsize());
 
             a = 0;
 
@@ -853,7 +853,7 @@ void comp_size(void)
             break;
 
         case INT:
-            k = INTSIZE;
+            k = arch_intsize();
 
             break;
 
@@ -871,7 +871,7 @@ void comp_size(void)
         if (STAR == Token)
         {
 
-            k = PTRSIZE;
+            k = arch_pointersize();
             Token = scan();
 
             if (STAR == Token)

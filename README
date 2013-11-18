@@ -4,7 +4,7 @@
 
 ### Compiler
 
-* Fix BPW value, need to manually edit it right now
+* Fix so it does not depend on stdlib
 
 ### Assembler
 

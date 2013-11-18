@@ -1,6 +1,20 @@
 #include "../../defs.h"
 #include "../../cgen.h"
 
+int arch_intsize()
+{
+
+    return 8;
+
+}
+
+int arch_pointersize()
+{
+
+    return 8;
+
+}
+
 void cgdata(void)
 {
 

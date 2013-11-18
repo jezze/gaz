@@ -271,12 +271,12 @@ static int pmtrdecls(void)
 
     }
 
-    addr = INTSIZE * 2;
+    addr = arch_intsize() * 2;
 
     for (y = Locs; y < NSYMBOLS; y++)
     {
 
-        addr += INTSIZE;
+        addr += arch_intsize();
         Vals[y] = addr;
 
     }
@@ -595,7 +595,7 @@ static int localdecls(void)
             ini = val = 0;
             type = declarator(0, CAUTO, name, &prim, &size, &val, &ini);
             rsize = objsize(prim, type, size);
-            rsize = (rsize + INTSIZE - 1) / INTSIZE * INTSIZE;
+            rsize = (rsize + arch_intsize() - 1) / arch_intsize() * arch_intsize();
 
             if (stat)
             {
@@ -859,7 +859,7 @@ void structdecl(int clss, int uniondecl)
             {
 
                 addr += size;
-                addr = (addr + INTSIZE - 1) / INTSIZE * INTSIZE;
+                addr = (addr + arch_intsize() - 1) / arch_intsize() * arch_intsize();
 
             }
 
