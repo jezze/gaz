@@ -273,12 +273,12 @@ void genaddr(int y)
 
     gentext();
 
-    if (CAUTO == Stcls[y])
-        queue(addr_auto, Vals[y], NULL);
-    else if (CLSTATC == Stcls[y])
-        queue(addr_static, Vals[y], NULL);
+    if (CAUTO == symbols[y].stcl)
+        queue(addr_auto, symbols[y].value, NULL);
+    else if (CLSTATC == symbols[y].stcl)
+        queue(addr_static, symbols[y].value, NULL);
     else
-        queue(addr_globl, 0, Names[y]);
+        queue(addr_globl, 0, symbols[y].name);
 
 }
 
@@ -832,7 +832,7 @@ void gencall(int y)
 
     gentext();
     commit();
-    cgcall(gsym(Names[y]));
+    cgcall(gsym(symbols[y].name));
     load();
 
 }
@@ -1024,23 +1024,23 @@ static void genincptr(int *lv, int inc, int pre)
 
     }
 
-    else if (CAUTO == Stcls[y])
+    else if (CAUTO == symbols[y].stcl)
     {
 
         if (inc)
-            cgincpl(Vals[y], size);
+            cgincpl(symbols[y].value, size);
         else
-            cgdecpl(Vals[y], size);
+            cgdecpl(symbols[y].value, size);
 
     }
 
-    else if (CLSTATC == Stcls[y])
+    else if (CLSTATC == symbols[y].stcl)
     {
 
         if (inc)
-            cgincps(Vals[y], size);
+            cgincps(symbols[y].value, size);
         else
-            cgdecps(Vals[y], size);
+            cgdecps(symbols[y].value, size);
 
     }
 
@@ -1048,9 +1048,9 @@ static void genincptr(int *lv, int inc, int pre)
     {
 
         if (inc)
-            cgincpg(gsym(Names[y]), size);
+            cgincpg(gsym(symbols[y].name), size);
         else
-            cgdecpg(gsym(Names[y]), size);
+            cgdecpg(gsym(symbols[y].name), size);
 
     }
 
@@ -1116,23 +1116,23 @@ void geninc(int *lv, int inc, int pre)
 
     }
 
-    else if (CAUTO == Stcls[y])
+    else if (CAUTO == symbols[y].stcl)
     {
 
         if (inc)
-            b ? cginclb(Vals[y]) : cginclw(Vals[y]);
+            b ? cginclb(symbols[y].value) : cginclw(symbols[y].value);
         else
-            b ? cgdeclb(Vals[y]) : cgdeclw(Vals[y]);
+            b ? cgdeclb(symbols[y].value) : cgdeclw(symbols[y].value);
 
     }
 
-    else if (CLSTATC == Stcls[y])
+    else if (CLSTATC == symbols[y].stcl)
     {
 
         if (inc)
-            b ? cgincsb(Vals[y]) : cgincsw(Vals[y]);
+            b ? cgincsb(symbols[y].value) : cgincsw(symbols[y].value);
         else
-            b ? cgdecsb(Vals[y]) : cgdecsw(Vals[y]);
+            b ? cgdecsb(symbols[y].value) : cgdecsw(symbols[y].value);
 
     }
 
@@ -1140,9 +1140,9 @@ void geninc(int *lv, int inc, int pre)
     {
 
         if (inc)
-            b ? cgincgb(gsym(Names[y])) : cgincgw(gsym(Names[y]));
+            b ? cgincgb(gsym(symbols[y].name)) : cgincgw(gsym(symbols[y].name));
         else
-            b ? cgdecgb(gsym(Names[y])) : cgdecgw(gsym(Names[y]));
+            b ? cgdecgb(gsym(symbols[y].name)) : cgdecgw(gsym(symbols[y].name));
 
     }
 
@@ -1273,23 +1273,23 @@ void genstore(int op, int *lv, int *lv2)
 
     }
 
-    else if (CAUTO == Stcls[lv[LVSYM]])
+    else if (CAUTO == symbols[lv[LVSYM]].stcl)
     {
 
         if (PCHAR == lv[LVPRIM])
-            cgstorlb(Vals[lv[LVSYM]]);
+            cgstorlb(symbols[lv[LVSYM]].value);
         else
-            cgstorlw(Vals[lv[LVSYM]]);
+            cgstorlw(symbols[lv[LVSYM]].value);
 
     }
 
-    else if (CLSTATC == Stcls[lv[LVSYM]])
+    else if (CLSTATC == symbols[lv[LVSYM]].stcl)
     {
 
         if (PCHAR == lv[LVPRIM])
-            cgstorsb(Vals[lv[LVSYM]]);
+            cgstorsb(symbols[lv[LVSYM]].value);
         else
-            cgstorsw(Vals[lv[LVSYM]]);
+            cgstorsw(symbols[lv[LVSYM]].value);
 
     }
 
@@ -1297,9 +1297,9 @@ void genstore(int op, int *lv, int *lv2)
     {
 
         if (PCHAR == lv[LVPRIM])
-            cgstorgb(gsym(Names[lv[LVSYM]]));
+            cgstorgb(gsym(symbols[lv[LVSYM]].name));
         else
-            cgstorgw(gsym(Names[lv[LVSYM]]));
+            cgstorgw(gsym(symbols[lv[LVSYM]].name));
 
     }
 
@@ -1320,23 +1320,23 @@ void rvalue(int *lv)
 
     }
 
-    else if (CAUTO == Stcls[lv[LVSYM]])
+    else if (CAUTO == symbols[lv[LVSYM]].stcl)
     {
 
         if (PCHAR == lv[LVPRIM])
-            queue(auto_byte, Vals[lv[LVSYM]], NULL);
+            queue(auto_byte, symbols[lv[LVSYM]].value, NULL);
         else
-            queue(auto_word, Vals[lv[LVSYM]], NULL);
+            queue(auto_word, symbols[lv[LVSYM]].value, NULL);
 
     }
 
-    else if (CLSTATC == Stcls[lv[LVSYM]])
+    else if (CLSTATC == symbols[lv[LVSYM]].stcl)
     {
 
         if (PCHAR == lv[LVPRIM])
-            queue(static_byte, Vals[lv[LVSYM]], NULL);
+            queue(static_byte, symbols[lv[LVSYM]].value, NULL);
         else
-            queue(static_word, Vals[lv[LVSYM]], NULL);
+            queue(static_word, symbols[lv[LVSYM]].value, NULL);
 
     }
 
@@ -1344,9 +1344,9 @@ void rvalue(int *lv)
     {
 
         if (PCHAR == lv[LVPRIM])
-            queue(globl_byte, 0, Names[lv[LVSYM]]);
+            queue(globl_byte, 0, symbols[lv[LVSYM]].name);
         else
-            queue(globl_word, 0, Names[lv[LVSYM]]);
+            queue(globl_word, 0, symbols[lv[LVSYM]].name);
 
     }
 

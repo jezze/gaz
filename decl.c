@@ -180,7 +180,7 @@ int primtype(int t, char *s)
 
         }
 
-        if ((y = findstruct(s)) == 0 || Prims[y] != p)
+        if ((y = findstruct(s)) == 0 || symbols[y].prims != p)
             error("no such struct/union: %s", s);
 
         p |= y;
@@ -277,7 +277,7 @@ static int pmtrdecls(void)
     {
 
         addr += arch_intsize();
-        Vals[y] = addr;
+        symbols[y].value = addr;
 
     }
 
@@ -668,25 +668,25 @@ static void signature(int fn, int from, int to)
     int types[MAXFNARGS + 1], i;
 
     if (to - from > MAXFNARGS)
-        error("too many function parameters", Names[fn]);
+        error("too many function parameters", symbols[fn].name);
 
     for (i = 0; i < MAXFNARGS && from < to; i++)
-        types[i] = Prims[--to];
+        types[i] = symbols[--to].prims;
 
     types[i] = 0;
 
-    if (NULL == Mtext[fn])
+    if (NULL == symbols[fn].mtext)
     {
 
-        Mtext[fn] = galloc((i + 1) * sizeof(int));
-        memcpy(Mtext[fn], types, (i + 1) * sizeof(int));
+        symbols[fn].mtext = galloc((i + 1) * sizeof(int));
+        memcpy(symbols[fn].mtext, types, (i + 1) * sizeof(int));
 
     }
 
-    else if (Sizes[fn] >= 0 && intcmp((int *) Mtext[fn], types))
+    else if (symbols[fn].size >= 0 && intcmp((int *) symbols[fn].mtext, types))
     {
 
-        error("redeclaration does not match prior type: %s", Names[fn]);
+        error("redeclaration does not match prior type: %s", symbols[fn].name);
 
     }
 
@@ -876,7 +876,7 @@ static void structdecl(int clss, int uniondecl)
 
     rbrace();
     semi();
-    Sizes[y] = uniondecl ? usize : addr;
+    symbols[y].size = uniondecl ? usize : addr;
 
 }
 

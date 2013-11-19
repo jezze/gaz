@@ -209,7 +209,7 @@ static void return_stmt(void)
         if (expr(lv))
             rvalue(lv);
 
-        if (!typematch(lv[LVPRIM], Prims[Thisfn]))
+        if (!typematch(lv[LVPRIM], symbols[Thisfn].prims))
             error("incompatible type in 'return'", NULL);
 
     }
@@ -217,7 +217,7 @@ static void return_stmt(void)
     else
     {
 
-        if (Prims[Thisfn] != PVOID)
+        if (symbols[Thisfn].prims != PVOID)
             error("missing value after 'return'", NULL);
 
     }

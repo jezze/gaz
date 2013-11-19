@@ -126,12 +126,12 @@ static int constfac(void)
 
         y = findsym(Text);
 
-        if (!y || Types[y] != TCONSTANT)
+        if (!y || symbols[y].type != TCONSTANT)
             error("not a constant: %s", Text);
 
         Token = scan();
 
-        return y ? Vals[y] : 0;
+        return y ? symbols[y].value : 0;
 
     }
 
@@ -338,9 +338,9 @@ static int primary(int *lv)
         }
 
         lv[LVSYM] = y;
-        lv[LVPRIM] = Prims[y];
+        lv[LVPRIM] = symbols[y].prims;
 
-        if (TFUNCTION == Types[y])
+        if (TFUNCTION == symbols[y].type)
         {
 
             if (LPAREN != Token)
@@ -356,16 +356,16 @@ static int primary(int *lv)
 
         }
 
-        if (TCONSTANT == Types[y])
+        if (TCONSTANT == symbols[y].type)
         {
 
-            genlit(Vals[y]);
+            genlit(symbols[y].value);
 
             return 0;
 
         }
 
-        if (TARRAY == Types[y])
+        if (TARRAY == symbols[y].type)
         {
 
             genaddr(y);
@@ -376,7 +376,7 @@ static int primary(int *lv)
 
         }
 
-        if (comptype(Prims[y]))
+        if (comptype(symbols[y].prims))
         {
 
             genaddr(y);
@@ -487,7 +487,7 @@ static int fnargs(int fn)
     char msg[100];
     int sgn[MAXFNARGS + 1];
 
-    types = (int *) (fn ? Mtext[fn]: NULL);
+    types = (int *) (fn ? symbols[fn].mtext: NULL);
 
     na = 0;
 
@@ -513,7 +513,7 @@ static int fnargs(int fn)
             {
 
                 sprintf(msg, "wrong type in argument %d of call to: %%s", na + 1);
-                error(msg, Names[fn]);
+                error(msg, symbols[fn].name);
 
             }
 
@@ -533,11 +533,11 @@ static int fnargs(int fn)
 
     }
 
-    if (fn && TFUNCTION == Types[fn] && !Mtext[fn])
+    if (fn && TFUNCTION == symbols[fn].type && !symbols[fn].mtext)
     {
 
-        Mtext[fn] = galloc((na + 1) * sizeof(int));
-        memcpy(Mtext[fn], sgn, (na + 1) * sizeof(int));
+        symbols[fn].mtext = galloc((na + 1) * sizeof(int));
+        memcpy(symbols[fn].mtext, sgn, (na + 1) * sizeof(int));
 
     }
 
@@ -617,7 +617,7 @@ static int indirection(int a, int *lv)
     {
 
         if (lv[LVSYM])
-            error("indirection through non-pointer: %s", Names[lv[LVSYM]]);
+            error("indirection through non-pointer: %s", symbols[lv[LVSYM]].name);
         else
             error("indirection through non-pointer", NULL);
 
@@ -636,7 +636,7 @@ static void badcall(int *lv)
 {
 
     if (lv[LVSYM])
-        error("call of non-function: %s", Names[lv[LVSYM]]);
+        error("call of non-function: %s", symbols[lv[LVSYM]].name);
     else
         error("call of non-function", NULL);
 
@@ -672,18 +672,18 @@ static int stc_access(int *pprim, int ptr)
     if (0 == y)
         error("struct/union has no such member: %s", Text);
 
-    if ((PSTRUCT == p || STCPTR == p) && Vals[y])
+    if ((PSTRUCT == p || STCPTR == p) && symbols[y].value)
     {
 
-        genlit(Vals[y]);
+        genlit(symbols[y].value);
         genadd(PINT, PINT, 1);
 
     }
 
     Token = scan();
-    p = Prims[y];
+    p = symbols[y].prims;
 
-    if (TARRAY == Types[y])
+    if (TARRAY == symbols[y].type)
     {
 
         p = pointerto(p);
@@ -750,11 +750,11 @@ static int postfix(int *lv)
             Token = scan();
             na = fnargs(lv[LVSYM]);
 
-            if (lv[LVSYM] && TFUNCTION == Types[lv[LVSYM]])
+            if (lv[LVSYM] && TFUNCTION == symbols[lv[LVSYM]].type)
             {
 
-                if (!argsok(na, Sizes[lv[LVSYM]]))
-                    error("wrong number of arguments: %s", Names[lv[LVSYM]]);
+                if (!argsok(na, symbols[lv[LVSYM]].size))
+                    error("wrong number of arguments: %s", symbols[lv[LVSYM]].name);
 
                 gencall(lv[LVSYM]);
 
@@ -891,8 +891,8 @@ void comp_size(void)
     else
     {
 
-        y = prefix(lv)? lv[LVSYM]: 0;
-        k = y ? objsize(Prims[y], Types[y], Sizes[y]) : objsize(lv[LVPRIM], TVARIABLE, 1);
+        y = prefix(lv) ? lv[LVSYM] : 0;
+        k = y ? objsize(symbols[y].prims, symbols[y].type, symbols[y].size) : objsize(lv[LVPRIM], TVARIABLE, 1);
 
         if (0 == k)
             error("cannot compute sizeof: %s", Text);
@@ -1029,7 +1029,7 @@ static int prefix(int *lv)
 
         }
 
-        else if ((0 == lv[LVSYM] || Types[lv[LVSYM]] != TARRAY) && !comptype(lv[LVPRIM]))
+        else if ((0 == lv[LVSYM] || symbols[lv[LVSYM]].type != TARRAY) && !comptype(lv[LVPRIM]))
         {
 
             error("location expected after unary '&'", NULL);

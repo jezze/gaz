@@ -8,7 +8,7 @@ static int findglob(char *s)
     for (i = 0; i < Globs; i++)
     {
 
-        if (Types[i] != TMACRO && Stcls[i] != CMEMBER && *s == *Names[i] && !strcmp(s, Names[i]))
+        if (symbols[i].type != TMACRO && symbols[i].stcl != CMEMBER && *s == *symbols[i].name && !strcmp(s, symbols[i].name))
             return i;
 
     }
@@ -25,7 +25,7 @@ static int findloc(char *s)
     for (i = Locs; i < NSYMBOLS; i++)
     {
 
-        if (Stcls[i] != CMEMBER && *s == *Names[i] && !strcmp(s, Names[i]))
+        if (symbols[i].stcl != CMEMBER && *s == *symbols[i].name && !strcmp(s, symbols[i].name))
             return i;
     }
 
@@ -51,11 +51,11 @@ int findstruct(char *s)
     int i;
 
     for (i = Locs; i < NSYMBOLS; i++)
-        if (TSTRUCT == Types[i] && *s == *Names[i] && !strcmp(s, Names[i]))
+        if (TSTRUCT == symbols[i].type && *s == *symbols[i].name && !strcmp(s, symbols[i].name))
             return i;
 
     for (i = 0; i < Globs; i++)
-        if (TSTRUCT == Types[i] && *s == *Names[i] && !strcmp(s, Names[i]))
+        if (TSTRUCT == symbols[i].type && *s == *symbols[i].name && !strcmp(s, symbols[i].name))
             return i;
 
     return 0;
@@ -67,10 +67,10 @@ int findmem(int y, char *s)
 
     y++;
 
-    while (y < Globs || y >= Locs && y < NSYMBOLS && CMEMBER == Stcls[y])
+    while (y < Globs || y >= Locs && y < NSYMBOLS && CMEMBER == symbols[y].stcl)
     {
 
-        if (*s == *Names[y] && !strcmp(s, Names[y]))
+        if (*s == *symbols[y].name && !strcmp(s, symbols[y].name))
             return y;
 
         y++;
@@ -281,10 +281,10 @@ int addglob(char *name, int prim, int type, int scls, int size, int val, char *m
     if ((y = findglob(name)) != 0)
     {
 
-        scls = redeclare(name, Stcls[y], scls);
+        scls = redeclare(name, symbols[y].stcl, scls);
 
-        if (TFUNCTION == Types[y])
-            mtext = Mtext[y];
+        if (TFUNCTION == symbols[y].type)
+            mtext = symbols[y].mtext;
 
     }
 
@@ -292,14 +292,14 @@ int addglob(char *name, int prim, int type, int scls, int size, int val, char *m
     {
 
         y = newglob();
-        Names[y] = globname(name);
+        symbols[y].name = globname(name);
 
     }
 
-    else if (TFUNCTION == Types[y] || TMACRO == Types[y])
+    else if (TFUNCTION == symbols[y].type || TMACRO == symbols[y].type)
     {
 
-        if (Prims[y] != prim || Types[y] != type)
+        if (symbols[y].prims != prim || symbols[y].type != type)
             error("redefinition does not match prior type: %s", name);
 
     }
@@ -307,12 +307,12 @@ int addglob(char *name, int prim, int type, int scls, int size, int val, char *m
     if (CPUBLIC == scls || CSTATIC == scls)
         defglob(name, prim, type, size, val, scls, init);
 
-    Prims[y] = prim;
-    Types[y] = type;
-    Stcls[y] = scls;
-    Sizes[y] = size;
-    Vals[y] = val;
-    Mtext[y] = mtext;
+    symbols[y].prims = prim;
+    symbols[y].type = type;
+    symbols[y].stcl = scls;
+    symbols[y].size = size;
+    symbols[y].value = val;
+    symbols[y].mtext = mtext;
 
     return y;
 
@@ -391,12 +391,12 @@ int addloc(char *name, int prim, int type, int scls, int size, int val, int init
     if (CLSTATC == scls)
         defloc(prim, type, size, val, init);
 
-    Names[y] = locname(name);
-    Prims[y] = prim;
-    Types[y] = type;
-    Stcls[y] = scls;
-    Sizes[y] = size;
-    Vals[y] = val;
+    symbols[y].name = locname(name);
+    symbols[y].prims = prim;
+    symbols[y].type = type;
+    symbols[y].stcl = scls;
+    symbols[y].size = size;
+    symbols[y].value = val;
 
     return y;
 
@@ -429,7 +429,7 @@ int objsize(int prim, int type, int size)
     else if (UNIPTR == sp || UNIPP == sp)
         k = arch_pointersize();
     else if (PSTRUCT == sp || PUNION == sp)
-        k = Sizes[prim & ~STCMASK];
+        k = symbols[prim & ~STCMASK].size;
     else if (FUNPTR == prim)
         k = arch_pointersize();
 

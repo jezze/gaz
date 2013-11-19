@@ -120,6 +120,19 @@ enum
 
 };
 
+struct symbol
+{
+
+    char *name;
+    int prims;
+    char type;
+    int size;
+    int value;
+    char stcl;
+    char *mtext;
+
+};
+
 int Token;
 char Text[TEXTLEN + 1];
 int Value;
@@ -133,13 +146,7 @@ char Rejtext[TEXTLEN + 1];
 char *File;
 int Isp;
 int Textseg;
-char *Names[NSYMBOLS];
-int Prims[NSYMBOLS];
-char Types[NSYMBOLS];
-char Stcls[NSYMBOLS];
-int Sizes[NSYMBOLS];
-int Vals[NSYMBOLS];
-char *Mtext[NSYMBOLS];
+struct symbol symbols[NSYMBOLS];
 int Globs;
 int Locs;
 int Thisfn;

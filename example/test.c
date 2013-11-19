@@ -1,14 +1,27 @@
-int hej(int x)
+struct astruct
 {
 
-    return x + 12;
+    char val1;
+    int val2;
+
+};
+
+int test_astruct(int x)
+{
+
+    struct astruct a;
+
+    a.val1 = 12;
+    a.val2 = 0;
+
+    return x + a.val1;
 
 }
 
 int main()
 {
 
-    return hej(20);
+    return test_astruct(20);
 
 }
 
