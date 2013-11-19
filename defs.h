@@ -160,7 +160,6 @@ int Q_cmp;
 int addglob(char *name, int prim, int type, int scls, int size, int val, char *mval, int init);
 int addloc(char *name, int prim, int type, int scls, int size, int val, int init);
 void cerror(char *s, int c);
-int chrpos(char *s, int c);
 void clear(int q);
 void clrlocs(void);
 void colon(void);

@@ -1,5 +1,14 @@
 #include "defs.h"
 
+static int chrpos(char *s, int c)
+{
+
+    char *p = strchr(s, c);
+
+    return p ? p - s : -1;
+
+}
+
 int next(void)
 {
 
