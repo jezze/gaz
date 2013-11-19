@@ -24,7 +24,7 @@ int next(void)
 
 }
 
-void putback(int c)
+static void putback(int c)
 {
 
     Putback = c;

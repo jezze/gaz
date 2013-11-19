@@ -251,7 +251,6 @@ void ngen2(char *s, char *inst, int n, int a);
 int objsize(int prim, int type, int size);
 int pointerto(int prim);
 int primtype(int t, char *s);
-void putback(int t);
 void rbrace(void);
 void rbrack(void);
 void reject(void);
