@@ -324,54 +324,113 @@ static int keyword(char *s)
     {
 
     case 'a':
-        if (!strcmp(s, "auto")) return AUTO;
+        if (!strcmp(s, "auto"))
+            return AUTO;
+
         break;
+
     case 'b':
-        if (!strcmp(s, "break")) return BREAK;
+        if (!strcmp(s, "break"))
+            return BREAK;
+
         break;
+
     case 'c':
-        if (!strcmp(s, "case")) return CASE;
-        if (!strcmp(s, "char")) return CHAR;
-        if (!strcmp(s, "continue")) return CONTINUE;
+        if (!strcmp(s, "case"))
+            return CASE;
+
+        if (!strcmp(s, "char"))
+            return CHAR;
+
+        if (!strcmp(s, "continue"))
+            return CONTINUE;
+
         break;
+
     case 'd':
-        if (!strcmp(s, "default")) return DEFAULT;
-        if (!strcmp(s, "do")) return DO;
+        if (!strcmp(s, "default"))
+            return DEFAULT;
+
+        if (!strcmp(s, "do"))
+            return DO;
+
         break;
+
     case 'e':
-        if (!strcmp(s, "else")) return ELSE;
-        if (!strcmp(s, "enum")) return ENUM;
-        if (!strcmp(s, "extern")) return EXTERN;
+        if (!strcmp(s, "else"))
+            return ELSE;
+
+        if (!strcmp(s, "enum"))
+            return ENUM;
+
+        if (!strcmp(s, "extern"))
+            return EXTERN;
+
         break;
+
     case 'f':
-        if (!strcmp(s, "for")) return FOR;
+        if (!strcmp(s, "for"))
+            return FOR;
+
         break;
+
     case 'i':
-        if (!strcmp(s, "if")) return IF;
-        if (!strcmp(s, "int")) return INT;
+        if (!strcmp(s, "if"))
+            return IF;
+
+        if (!strcmp(s, "int"))
+            return INT;
+
         break;
+
     case 'r':
-        if (!strcmp(s, "register")) return REGISTER;
-        if (!strcmp(s, "return")) return RETURN;
+        if (!strcmp(s, "register"))
+            return REGISTER;
+
+        if (!strcmp(s, "return"))
+            return RETURN;
+
         break;
+
     case 's':
-        if (!strcmp(s, "sizeof")) return SIZEOF;
-        if (!strcmp(s, "static")) return STATIC;
-        if (!strcmp(s, "struct")) return STRUCT;
-        if (!strcmp(s, "switch")) return SWITCH;
+        if (!strcmp(s, "sizeof"))
+            return SIZEOF;
+
+        if (!strcmp(s, "static"))
+            return STATIC;
+
+        if (!strcmp(s, "struct"))
+            return STRUCT;
+
+        if (!strcmp(s, "switch"))
+            return SWITCH;
+
         break;
+
     case 'u':
-        if (!strcmp(s, "union")) return UNION;
+        if (!strcmp(s, "union"))
+            return UNION;
+
         break;
+
     case 'v':
-        if (!strcmp(s, "void")) return VOID;
+        if (!strcmp(s, "void"))
+            return VOID;
+
         break;
+
     case 'w':
-        if (!strcmp(s, "while")) return WHILE;
+        if (!strcmp(s, "while"))
+            return WHILE;
+
         break;
+
     case '_':
-        if (!strcmp(s, "__argc")) return __ARGC;
+        if (!strcmp(s, "__argc"))
+            return __ARGC;
+
         break;
+
     }
 
     return 0;
@@ -487,6 +546,7 @@ static int scanpp(void)
             {
 
                 Text[1] = '=';
+
                 return ASMUL;
 
             }
