@@ -891,15 +891,13 @@ void comp_size(void)
     else
     {
 
-        suspend();
-
         y = prefix(lv)? lv[LVSYM]: 0;
         k = y ? objsize(Prims[y], Types[y], Sizes[y]) : objsize(lv[LVPRIM], TVARIABLE, 1);
 
         if (0 == k)
             error("cannot compute sizeof: %s", Text);
 
-        resume();
+        clear(1);
 
     }
 

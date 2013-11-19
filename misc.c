@@ -9,18 +9,6 @@ void copyname(char *name, char *s)
 
 }
 
-void suspend(void)
-{
-
-}
-
-void resume(void)
-{
-
-    clear(1);
-
-}
-
 void match(int t, char *what)
 {
 
