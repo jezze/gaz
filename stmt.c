@@ -2,36 +2,6 @@
 
 static void stmt(void);
 
-/*
- * compound :=
- *      { stmt_list }
- *    | { }
- *
- * stmt_list:
- *      stmt
- *    | stmt stmt_list
- */
-
-void compound(int lbr)
-{
-
-    if (lbr)
-        Token = scan();
-
-    while (RBRACE != Token)
-    {
-
-        if (eofcheck())
-            return;
-
-        stmt();
-
-    }
-
-    Token = scan();
-
-}
-
 static void pushbrk(int id)
 {
 
@@ -525,6 +495,36 @@ static void stmt(void)
     }
 
     clear(1);
+
+}
+
+/*
+ * compound :=
+ *      { stmt_list }
+ *    | { }
+ *
+ * stmt_list:
+ *      stmt
+ *    | stmt stmt_list
+ */
+
+void compound(int lbr)
+{
+
+    if (lbr)
+        Token = scan();
+
+    while (RBRACE != Token)
+    {
+
+        if (eofcheck())
+            return;
+
+        stmt();
+
+    }
+
+    Token = scan();
 
 }
 
