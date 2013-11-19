@@ -702,7 +702,7 @@ static void signature(int fn, int from, int to)
  *    | declarator , decl_list
  */
 
-void decl(int clss, int prim)
+static void decl(int clss, int prim)
 {
 
     char name[NAMELEN + 1];
@@ -799,7 +799,7 @@ void decl(int clss, int prim)
  *    | declatator , mdecl_list
  */
 
-void structdecl(int clss, int uniondecl)
+static void structdecl(int clss, int uniondecl)
 {
 
     int base, prim, size, dummy, type, addr = 0;
