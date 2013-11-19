@@ -248,7 +248,7 @@ static int scanident(int c, char *buf, int lim)
 
 }
 
-int skip(void)
+static int skip(void)
 {
 
     int c = next();

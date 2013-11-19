@@ -263,7 +263,6 @@ int scan(void);
 void semi(void);
 void sgen(char *s, char *inst, char *s2);
 void sgen2(char *s, char *inst, int v, char *s2);
-int skip(void);
 void suspend(void);
 int synch(int syn);
 void top(void);
