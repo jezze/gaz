@@ -8,7 +8,6 @@ int main(int argc, char *argv[])
     Rejected = -1;
     Errors = 0;
     Syntoken = 0;
-    Isp = 0;
     Globs = 0;
     Locs = NSYMBOLS;
     Nbot = 0;

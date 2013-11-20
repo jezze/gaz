@@ -144,7 +144,6 @@ int Rejected;
 int Rejval;
 char Rejtext[TEXTLEN + 1];
 char *File;
-int Isp;
 int Textseg;
 struct symbol symbols[NSYMBOLS];
 int Globs;
