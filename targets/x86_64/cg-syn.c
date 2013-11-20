@@ -1,4 +1,4 @@
-#include "../../defs.h"
+#include "../../cc.h"
 #include "../../cgen.h"
 
 int arch_intsize()

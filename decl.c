@@ -1,4 +1,4 @@
-#include "defs.h"
+#include "cc.h"
 
 static int declarator(int arg, int scls, char *name, int *pprim, int *psize, int *pval, int *pinit);
 

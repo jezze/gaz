@@ -1,36 +1,38 @@
-TARGETS_STK=targets/gen-stk.c
-TARGETS_SYN=targets/gen-syn.c
-TARGETS_X86_16_SYN=$(TARGETS_SYN) targets/x86_16/cg-syn.c
-TARGETS_X86_32_STK=$(TARGETS_STK) targets/x86_32/cg-stk.c
-TARGETS_X86_32_SYN=$(TARGETS_SYN) targets/x86_32/cg-syn.c
-TARGETS_X86_64_STK=$(TARGETS_STK) targets/x86_64/cg-stk.c
-TARGETS_X86_64_SYN=$(TARGETS_SYN) targets/x86_64/cg-syn.c
+AS_OBJ=as.o
+CC_OBJ=cc.o decl.o expr.o misc.o scan.o stmt.o sym.o
+CC_OBJ_STK=targets/gen-stk.o
+CC_OBJ_SYN=targets/gen-syn.o
+CC_OBJ_X86_16_SYN=$(CC_OBJ_SYN) targets/x86_16/cg-syn.o
+CC_OBJ_X86_32_STK=$(CC_OBJ_STK) targets/x86_32/cg-stk.o
+CC_OBJ_X86_32_SYN=$(CC_OBJ_SYN) targets/x86_32/cg-syn.o
+CC_OBJ_X86_64_STK=$(CC_OBJ_STK) targets/x86_64/cg-stk.o
+CC_OBJ_X86_64_SYN=$(CC_OBJ_SYN) targets/x86_64/cg-syn.o
 
-SRC=decl.c expr.c main.c misc.c scan.c stmt.c sym.c
-OBJ=decl.o expr.o main.o misc.o scan.o stmt.o sym.o
-
-all: scc16-syn scc32-stk scc32-syn scc64-stk scc64-syn
+all: cc16-syn cc32-stk cc32-syn cc64-stk cc64-syn
 
 .c.o:
-	$(CC) -c $<
+	$(CC) -c -o $@ $<
 
-scc16-syn: $(OBJ) $(TARGETS_X86_16_SYN)
+as: $(AS_OBJ)
 	$(CC) -o $@ $^
 
-scc32-stk: $(OBJ) $(TARGETS_X86_32_STK)
+cc16-syn: $(CC_OBJ) $(CC_OBJ_X86_16_SYN)
 	$(CC) -o $@ $^
 
-scc32-syn: $(OBJ) $(TARGETS_X86_32_SYN)
+cc32-stk: $(CC_OBJ) $(CC_OBJ_X86_32_STK)
 	$(CC) -o $@ $^
 
-scc64-stk: $(OBJ) $(TARGETS_X86_64_STK)
+cc32-syn: $(CC_OBJ) $(CC_OBJ_X86_32_SYN)
 	$(CC) -o $@ $^
 
-scc64-syn: $(OBJ) $(TARGETS_X86_64_SYN)
+cc64-stk: $(CC_OBJ) $(CC_OBJ_X86_64_STK)
+	$(CC) -o $@ $^
+
+cc64-syn: $(CC_OBJ) $(CC_OBJ_X86_64_SYN)
 	$(CC) -o $@ $^
 
 example/test.s: example/test.c
-	./scc32-syn < $^ > $@
+	./cc32-syn < $^ > $@
 
 example/test.o: example/test.s
 	$(AS) -o $@ $^
@@ -39,10 +41,21 @@ example/test: example/test.o
 	$(CC) -o example/test example/test.o example/crt0.s
 
 clean:
-	rm -f scc16*
-	rm -f scc32*
-	rm -f scc64*
-	rm -f $(OBJ)
+	rm -f as
+	rm -f $(AS_OBJ)
+	rm -f cc16-syn
+	rm -f cc32-stk
+	rm -f cc32-syn
+	rm -f cc64-stk
+	rm -f cc64-syn
+	rm -f $(CC_OBJ)
+	rm -f $(CC_OBJ_STK)
+	rm -f $(CC_OBJ_SYN)
+	rm -f $(CC_OBJ_X86_16_SYN)
+	rm -f $(CC_OBJ_X86_32_STK)
+	rm -f $(CC_OBJ_X86_32_SYN)
+	rm -f $(CC_OBJ_X86_64_STK)
+	rm -f $(CC_OBJ_X86_64_SYN)
 	rm -f example/test.s
 	rm -f example/test.o
 	rm -f example/test

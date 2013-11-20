@@ -1,4 +1,4 @@
-#include "defs.h"
+#include "cc.h"
 
 void copyname(char *name, char *s)
 {

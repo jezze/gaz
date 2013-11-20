@@ -1,4 +1,4 @@
-#include "defs.h"
+#include "cc.h"
 
 static int findglob(char *s)
 {

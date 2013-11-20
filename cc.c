@@ -1,4 +1,4 @@
-#include "defs.h"
+#include "cc.h"
 
 int main(int argc, char *argv[])
 {
