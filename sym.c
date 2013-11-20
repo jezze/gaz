@@ -120,7 +120,7 @@ char *galloc(int k)
 
 }
 
-char *globname(char *s)
+static char *globname(char *s)
 {
 
     char *p = galloc(strlen(s) + 1);

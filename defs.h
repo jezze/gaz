@@ -239,7 +239,6 @@ int gensub(int p1, int p2, int swap);
 void genswitch(int *vals, int *labs, int nc, int dflt);
 void gentext(void);
 void genxor(void);
-char *globname(char *s);
 char *gsym(char *s);
 void ident(void);
 int inttype(int p);

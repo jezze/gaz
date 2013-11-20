@@ -20,7 +20,6 @@ int main(int argc, char *argv[])
     File = "(stdin)";
 
     addglob("", 0, 0, 0, 0, 0, NULL, 0);
-    addglob("__SUBC__", 0, TMACRO, 0, 0, 0, globname(""), 0);
     genprelude();
 
     Token = scan();
