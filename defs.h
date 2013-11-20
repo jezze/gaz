@@ -21,7 +21,6 @@ enum
     TARRAY,
     TFUNCTION,
     TCONSTANT,
-    TMACRO,
     TSTRUCT
 
 };

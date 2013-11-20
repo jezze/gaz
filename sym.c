@@ -8,7 +8,7 @@ static int findglob(char *s)
     for (i = 0; i < Globs; i++)
     {
 
-        if (symbols[i].type != TMACRO && symbols[i].stcl != CMEMBER && *s == *symbols[i].name && !strcmp(s, symbols[i].name))
+        if (symbols[i].stcl != CMEMBER && *s == *symbols[i].name && !strcmp(s, symbols[i].name))
             return i;
 
     }
@@ -296,7 +296,7 @@ int addglob(char *name, int prim, int type, int scls, int size, int val, char *m
 
     }
 
-    else if (TFUNCTION == symbols[y].type || TMACRO == symbols[y].type)
+    else if (TFUNCTION == symbols[y].type)
     {
 
         if (symbols[y].prims != prim || symbols[y].type != type)
@@ -433,7 +433,7 @@ int objsize(int prim, int type, int size)
     else if (FUNPTR == prim)
         k = arch_pointersize();
 
-    if (TFUNCTION == type || TCONSTANT == type || TMACRO == type)
+    if (TFUNCTION == type || TCONSTANT == type)
         return 0;
 
     if (TARRAY == type)
