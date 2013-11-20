@@ -138,13 +138,6 @@ void cgindw(void)
 
 }
 
-void cgargc(void)
-{
-
-    gen("movq\t16(%rbp),%rax");
-
-}
-
 void cgldlab(int id)
 {
 

@@ -81,11 +81,6 @@ void cgsynth(char *op)
 
         break;
 
-    case arg_count:
-        ngen("%s\tax,[bp%+d]", op, 4);
-
-        break;
-
     case auto_word:
         ngen("%s\tax,[bp%+d]", op, n);
 
@@ -178,11 +173,6 @@ int cgload(void)
 
     case literal:
         ngen("%s\tcx,%d", op, n);
-
-        break;
-
-    case arg_count:
-        ngen("%s\tcx,[bp%+d]", op, 4);
 
         break;
 
@@ -334,13 +324,6 @@ void cgindw(void)
 
     gen("mov\tbx,ax");
     gen("mov\tax,[bx]");
-
-}
-
-void cgargc(void)
-{
-
-    gen("mov\tax,[bp+4]");
 
 }
 

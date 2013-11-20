@@ -290,7 +290,6 @@ int constexpr(void)
  *      IDENT
  *    | INTLIT
  *    | string
- *    | __ARGC
  *    | ( expr )
  *
  * string :=
@@ -432,15 +431,6 @@ static int primary(int *lv)
         rparen();
 
         return a;
-
-    case __ARGC:
-        Token = scan();
-
-        genargc();
-
-        lv[LVPRIM] = PINT;
-
-        return 0;
 
     default:
         error("syntax error at: %s", Text);

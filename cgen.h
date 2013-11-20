@@ -2,7 +2,6 @@ int arch_intsize();
 int arch_pointersize();
 void cgadd(void);
 void cgand(void);
-void cgargc(void);
 void cgbool(void);
 void cgbreq(int n);
 void cgbrfalse(int n);

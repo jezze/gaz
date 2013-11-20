@@ -81,11 +81,6 @@ void cgsynth(char *op)
 
         break;
 
-    case arg_count:
-        ngen("%s\t%d(%%ebp),%%eax", op, 8);
-
-        break;
-
     case auto_word:
         ngen("%s\t%d(%%ebp),%%eax", op, n);
 
@@ -179,11 +174,6 @@ int cgload(void)
 
     case literal:
         ngen("%s\t$%d,%%ecx", op, n);
-
-        break;
-
-    case arg_count:
-        ngen("%s\t%d(%ebp),%ecx", op, 8);
 
         break;
 
@@ -333,13 +323,6 @@ void cgindw(void)
 {
 
     gen("movl\t(%eax),%eax");
-
-}
-
-void cgargc(void)
-{
-
-    gen("movl\t8(%ebp),%eax");
 
 }
 

@@ -139,13 +139,6 @@ void cgindw(void)
 
 }
 
-void cgargc(void)
-{
-
-    gen("movl\t8(%ebp),%eax");
-
-}
-
 void cgldlab(int id)
 {
 

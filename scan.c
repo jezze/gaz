@@ -434,12 +434,6 @@ static int keyword(char *s)
 
         break;
 
-    case '_':
-        if (!strcmp(s, "__argc"))
-            return __ARGC;
-
-        break;
-
     }
 
     return 0;

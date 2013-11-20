@@ -80,7 +80,6 @@ enum
     addr_globl,
     addr_label,
     literal,
-    arg_count,
     auto_byte,
     auto_word,
     static_byte,
@@ -109,7 +108,7 @@ enum
     SLASH, STAR, MOD, PLUS, MINUS, LSHIFT, RSHIFT,
     GREATER, GTEQ, LESS, LTEQ, EQUAL, NOTEQ, AMPER,
     CARET, PIPE, LOGAND, LOGOR,
-    __ARGC, ARROW, ASAND, ASXOR, ASLSHIFT, ASMINUS, ASMOD, ASOR,
+    ARROW, ASAND, ASXOR, ASLSHIFT, ASMINUS, ASMOD, ASOR,
     ASPLUS, ASRSHIFT, ASDIV, ASMUL, ASSIGN, AUTO, BREAK, CASE,
     CHAR, COLON, COMMA, CONTINUE, DECR, DEFAULT, DO, DOT,
     ELLIPSIS, ELSE, ENUM, EXTERN, FOR, IDENT, IF, INCR, INT,
@@ -187,7 +186,6 @@ int genadd(int p1, int p2, int swap);
 void genaddr(int y);
 void genalign(int k);
 void genand(void);
-void genargc(void);
 void genasop(int op, int p1, int p2, int swap);
 int genbinop(int op, int p1, int p2);
 void genbool(void);

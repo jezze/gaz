@@ -204,11 +204,6 @@ void commit(void)
 
         break;
 
-    case arg_count:
-        cgargc();
-
-        break;
-
     case auto_byte:
         cgclear();
         cgldlb(Q_val);
@@ -295,14 +290,6 @@ void genlit(int v)
 
     gentext();
     queue(literal, v, NULL);
-
-}
-
-void genargc(void)
-{
-
-    gentext();
-    queue(arg_count, 0, NULL);
 
 }
 

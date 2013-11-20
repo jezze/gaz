@@ -155,16 +155,6 @@ void genlit(int v)
 
 }
 
-void genargc(void)
-{
-
-    gentext();
-    spill();
-    cgargc();
-    load();
-
-}
-
 void genand(void)
 {
 
